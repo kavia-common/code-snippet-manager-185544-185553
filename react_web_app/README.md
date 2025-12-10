@@ -1,82 +1,76 @@
-# Lightweight React Template for KAVIA
+# Python Snippet Manager (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A lightweight React app to manage Python questions and code snippets with a clean, modern UI.
 
-## Features
+## Overview
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Add questions with description and Python code
+- Expand/collapse cards to view details
+- Copy code to clipboard
+- Edit in place and delete
+- Persists to browser localStorage by default
+- API-ready data service abstraction
+
+Runs on port 3000 using the existing preview system.
 
 ## Getting Started
 
-In the project directory, you can run:
+Install and start:
 
-### `npm start`
+- npm install
+- npm start
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open http://localhost:3000 to view in your browser.
 
-### `npm test`
+## Usage
 
-Launches the test runner in interactive watch mode.
+- Fill in the "Question title" and "Code (Python)" fields (both required).
+- Optionally add a description.
+- Click Add to create a new snippet. It will appear in the list below.
+- Use Expand to see details and the code block with a Copy button.
+- Click Edit to populate the form; Save updates the selected snippet. Cancel exits edit mode.
+- Click Delete to remove a snippet.
 
-### `npm run build`
+All snippets are saved under the localStorage key snippet_items_v1.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Data Service & Environment Variables
 
-## Customization
+By default, data persists to localStorage. The app includes an abstraction layer to switch to a REST API without changing UI components.
 
-### Colors
+Environment variables read at build time:
+- REACT_APP_API_BASE
+- REACT_APP_BACKEND_URL
+- REACT_APP_FRONTEND_URL
+- REACT_APP_WS_URL
+- REACT_APP_NODE_ENV
+- REACT_APP_NEXT_TELEMETRY_DISABLED
+- REACT_APP_ENABLE_SOURCE_MAPS
+- REACT_APP_PORT
+- REACT_APP_TRUST_PROXY
+- REACT_APP_LOG_LEVEL
+- REACT_APP_HEALTHCHECK_PATH
+- REACT_APP_FEATURE_FLAGS
+- REACT_APP_EXPERIMENTS_ENABLED
 
-The main brand colors are defined as CSS variables in `src/App.css`:
+API usage is enabled automatically if either REACT_APP_API_BASE or REACT_APP_BACKEND_URL is set (non-empty). Expected endpoints (for future integration):
+- GET    /snippets
+- POST   /snippets
+- PUT    /snippets/:id
+- DELETE /snippets/:id
 
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
+If no API is available, localStorage is used and nothing else is required.
 
-### Components
+## Styling
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+- Light theme with primary #3b82f6 and accent #06b6d4
+- Minimal dependencies (vanilla CSS)
+- Monospace code block with Copy button
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+## Notes
 
-## Learn More
+- Do not modify the preview start/stop system; this app already runs on port 3000.
+- This project uses React functional components and hooks only.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT
